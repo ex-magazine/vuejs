@@ -6,23 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13"></script>
     <title>Vuejs 2</title>
+    <style>
+        .vuong{
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+        }
+        .do {
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
 
     <div id = "app">
         <button v-on:click="changeLink">Click to change link</button>
         <a v-bind:href="linkVal">Link</a>
+        <div class="vuong" v-on:click="quanlido = !quanlido" v-bind:class="{do: quanlido}" >
+
+        </div>
     </div>
     <script>
         new Vue ({
             el : '#app',
             data: {
-                linkVal: "https://google.com"
+                linkVal: "https://google.com",
+                quanlido: false,
+            },
+            computed: {
             },
             methods: {
                 changeLink: function() {
                     this.linkVal = 'https://facebook.com'
                 }
+            },
+            watch: {
+
             },
         });
     </script>
