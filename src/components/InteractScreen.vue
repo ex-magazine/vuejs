@@ -46,20 +46,29 @@
         methods: {
             checkRules(card) {     
                
-                if (this.rules.length === 2) return false;
-                this.rules.push(card);
-                if (this.rules.length === 2 && this.rules[0].value === this.rules[1].value) {
-                    console.log("Right ...");
-                    //add class disable toi component card
-                    this.$refs[`card-${this.rules[0].index}`][0].onEnabledDisabledMode();
-                    this.$refs[`card-${this.rules[1].index}`][0].onEnabledDisabledMode();                        
-                    this.rules = [];
-                    const disabledElements = document.querySelectorAll(".screen .card.disabled");
-                    if (disabledElements && disabledElements.length === this.cardsContext.length - 2) {
-                        setTimeout(() => {
-                            this.$emit("onFinish");
-                        }, 920);
-                    }
+               // if (this.rules.length === 2) return false;
+                this.rules.push(card);              
+                if (this.rules.length === 2 && this.rules[0].value === this.rules[1].value) {                    
+                    if (this.rules[0].index === this.rules[1].index) {
+                        console.log("Wrong ...");  
+                        setTimeout(() => {                       
+                            this.$refs[`card-${this.rules[0].index}`][0].onFlipBackCard();
+                            this.$refs[`card-${this.rules[1].index}`][0].onFlipBackCard();                        
+                            this.rules = [];
+                         },800);
+                    }else {
+                        console.log("Right ...");
+                         //add class disable toi component card
+                        this.$refs[`card-${this.rules[0].index}`][0].onEnabledDisabledMode();
+                        this.$refs[`card-${this.rules[1].index}`][0].onEnabledDisabledMode();                        
+                        this.rules = [];
+                        const disabledElements = document.querySelectorAll(".screen .card.disabled");
+                        if (disabledElements && disabledElements.length === this.cardsContext.length - 2) {
+                            setTimeout(() => {
+                                this.$emit("onFinish");
+                            }, 920);
+                        }
+                    } 
 
                 }  else if (this.rules.length === 2 && this.rules[0].value !== this.rules[1].value) {
                     console.log("Wrong ...");                  

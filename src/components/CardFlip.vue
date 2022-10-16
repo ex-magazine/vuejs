@@ -66,6 +66,7 @@
         },
         methods: {
             onToggleFlipCard() {
+                if (this.rules.length >= 2) return;
                 if (this.isDisabled) return false;
                 this.isFlipped = !this.isFlipped;
                 
